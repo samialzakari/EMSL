@@ -32,11 +32,11 @@
 	text-align: center;
 }
 .form-style-2 input.input-field, .form-style-2 .select-field{
-	width: 48%;	
+	width: 48%;
 }
-.form-style-2 input.input-field, 
-.form-style-2 .tel-number-field, 
-.form-style-2 .textarea-field, 
+.form-style-2 input.input-field,
+.form-style-2 .tel-number-field,
+.form-style-2 .textarea-field,
  .form-style-2 .select-field{
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -51,9 +51,9 @@
 	padding: 7px;
 	outline: none;
 }
-.form-style-2 .input-field:focus, 
-.form-style-2 .tel-number-field:focus, 
-.form-style-2 .textarea-field:focus,  
+.form-style-2 .input-field:focus,
+.form-style-2 .tel-number-field:focus,
+.form-style-2 .textarea-field:focus,
 .form-style-2 .select-field:focus{
 	border: 1px solid #0C0;
 }
@@ -85,25 +85,21 @@
 
 
 <div class="form-style-2">
-<div class="form-style-2-heading">Fill out the question information below:</div>
-<form method="POST" action="" >
-@csrf
-<label for="question"><span>Question: <span class="required">*</span></span><input type="text" class="input-field" name="question" value="{{old('question')}}" /></label>
+    <div class="form-style-2-heading">Fill out the question information below:</div>
+    <form method="POST" action="" >
+        @csrf
+        <label for="question"><span>Question: <span class="required">*</span></span><input type="text" class="input-field" name="question" value="{{old('question')}}" /></label>
 
-<label><span>Chapter number</span><input type="text" class="tel-number-field" name="chapter_no" value="{{old('chapter_no')}}" maxlength="4" /></label>
-<label><span>Mark</span><input type="text" class="tel-number-field" name="tel_no_1" value="" maxlength="4" /></label>
+        <label><span>Chapter number</span><input type="text" class="tel-number-field" name="chapter_no" value="{{old('chapter_no')}}" maxlength="4" /></label>
+        <label><span>Mark</span><input type="text" class="tel-number-field" name="tel_no_1" value="" maxlength="4" /></label>
 
-<label for="field5"><span>Answer <span class="required">*</span></span><input type="text" class="input-field" name="correct_answer" value="{{old('correct_answer')}}" /></label>
-<label for="field5"><span>Option 1 <span class="required">*</span></span><input type="text" class="input-field" name="option1" value="{{old('option1')}}" /></label>
-<label for="field5"><span>Option 2 <span class="required">*</span></span><input type="text" class="input-field" name="option2" value="{{old('option2')}}" /></label>
-<label for="field5"><span>Option 3 <span class="required">*</span></span><input type="text" class="input-field" name="option3" value="{{old('option3')}}" /></label>
+        <label for="field5"><span>Answer <span class="required">*</span></span><input type="text" class="input-field" name="correct_answer" value="{{old('correct_answer')}}" /></label>
+        <label for="field5"><span>Option 1 <span class="required">*</span></span><input type="text" class="input-field" name="option1" value="{{old('option1')}}" /></label>
+        <label for="field5"><span>Option 2 <span class="required">*</span></span><input type="text" class="input-field" name="option2" value="{{old('option2')}}" /></label>
+        <label for="field5"><span>Option 3 <span class="required">*</span></span><input type="text" class="input-field" name="option3" value="{{old('option3')}}" /></label>
 
-
-
-
-<button type="submit"> Submit </button>
-</form>
+        <button type="submit"> Submit </button>
+    </form>
 </div>
-
 
 @endsection

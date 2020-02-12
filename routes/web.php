@@ -21,6 +21,10 @@ Auth::routes();
 //     return view('/grade');
 // })->name('grade');
 
+Route::get('/CC', 'CourseCoordinatorController@index')->name('CC')->middleware('CourseCoordinator');
+Route::get('/FM', 'FacultyMemberController@index')->name('FM')->middleware('FacultyMember');
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/grade', 'ExamController@index');
@@ -36,7 +40,7 @@ Route::get('/schedule', function(){
 
 Route::get('/question/index', 'MCQController@index');
 Route::post('/question/addQuestion', 'MCQController@store');
-Route::get('/question/addQuestion', 'MCQController@create'); 
+Route::get('/question/addQuestion', 'MCQController@create');
 Route::get('/question/{id}', 'MCQController@show');
 
 
