@@ -49,10 +49,11 @@ class MCQController extends Controller
      * @param  \App\MCQ  $mCQ
      * @return \Illuminate\Http\Response
      */
-    public function show(MCQ $mcq)
+    public function show($id)
     {  
         
-        return view('question.show', ['mcq' => $mcq]);
+        // return view('question.show', ['mcq' => $mcq]);
+        return view('question.show', ['mcq' => MCQ::findOrFail($id)]);
     }
 
     /**
@@ -84,8 +85,11 @@ class MCQController extends Controller
      * @param  \App\MCQ  $mCQ
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MCQ $mCQ)
+    public function destroy($id)
     {
-        //
+        $mcq= MCQ::findOrFail($id);
+        $mcq->delete();
+        return redirect('/question/index');
+
     }
 }

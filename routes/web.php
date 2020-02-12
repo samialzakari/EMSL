@@ -34,10 +34,14 @@ Route::get('/schedule', function(){
          return view('/schedule'); });
 
 
+
+
 Route::get('/question/index', 'MCQController@index');
 Route::post('/question/addQuestion', 'MCQController@store');
 Route::get('/question/addQuestion', 'MCQController@create'); 
 Route::get('/question/{id}', 'MCQController@show');
+Route::delete('/question/{id}/delete', 'MCQController@destroy');
+
 
 
 
