@@ -76,7 +76,7 @@ background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(88,152,164,1) 100%);
                             <label for="role" class="col-md-4 col-form-label text-md-right">Role</label>
 
                             <div class="col-md-6">
-                                <select id="role" class="form-control" name="user-role" required >
+                                <select id="role" class="form-control" name="role" required >
                                     <option value="1">Course Coordinator</option>
                                     <option value="2">Faculty Member</option>
                                 </select>

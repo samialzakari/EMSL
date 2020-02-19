@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function enroll(){
+        return $this->belongsToMany(Section::class,'section_student')->where('role','=','3');
+    }
+
+    public function teach(){
+        return $this->hasMany(Section::class)->where('role','<','3');
+    }
+
+    public function coordinate(){
+        return $this->hasOne(Course::class)->where('role','=','1');
+    }
 }
