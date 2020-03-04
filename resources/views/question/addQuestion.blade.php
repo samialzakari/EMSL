@@ -91,7 +91,8 @@
         <label for="question"><span>Question: <span class="required">*</span></span><input type="text" class="input-field" name="question" value="{{old('question')}}" /></label>
 
         <label><span>Chapter number</span><input type="text" class="tel-number-field" name="chapter_no" value="{{old('chapter_no')}}" maxlength="4" /></label>
-        <label><span>Mark</span><input type="text" class="tel-number-field" name="tel_no_1" value="" maxlength="4" /></label>
+        <label><span>Mark</span><input type="text" class="tel-number-field" name="mark" value="" maxlength="4" /></label>
+        <label><span>Course id: </span><input type="number" class="tel-number-field" name="course_id" value="" maxlength="4" /></label>
 
         <label for="field5"><span>Answer <span class="required">*</span></span><input type="text" class="input-field" name="correct_answer" value="{{old('correct_answer')}}" /></label>
         <label for="field5"><span>Option 1 <span class="required">*</span></span><input type="text" class="input-field" name="option1" value="{{old('option1')}}" /></label>

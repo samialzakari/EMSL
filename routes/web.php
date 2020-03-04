@@ -44,7 +44,16 @@ Route::get('/question/index', 'MCQController@index');
 Route::post('/question/addQuestion', 'MCQController@store');
 Route::get('/question/addQuestion', 'MCQController@create');
 Route::get('/question/{id}', 'MCQController@show');
-Route::delete('/question/{id}/delete', 'MCQController@destroy');
+Route::delete('/question/{id}', 'MCQController@destroy');
+Route::get('question/{id}/edit', 'MCQController@edit');
+Route::put('question/{id}/edit', 'MCQController@update');
+
+
+Route::get('/exam', 'ExamController@index');
+Route::post('/exam', 'ExamController@select');
+Route::get('/exam/create', 'ExamController@create');
+Route::post('/exam/create', 'ExamController@store');
+Route::get('/exam/{id}', 'ExamController@show');
 
 
 

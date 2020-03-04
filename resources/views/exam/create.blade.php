@@ -83,34 +83,19 @@
 @section('content')
 
 
-
     <div class="form-style-2">
-        <div class="form-style-2-heading">Fill out the question information below:</div>
+        <div class="form-style-2-heading">Fill out the exam information below:</div>
         <form method="POST" action="" >
-            @method('PUT')
             @csrf
-            <label for="question"><span>Question: <span class="required">*</span></span>
-                <input type="text" class="input-field" name="question" value="{{ $mcq->question }}" /></label>
-
-            <label><span>Chapter number</span>
-                <input type="text" class="tel-number-field" name="chapter_no" value="{{$mcq->chapter_no}}" maxlength="4" /></label>
-
-            <label><span>Mark</span>
-                <input type="text" class="tel-number-field" name="mark" value="{{$mcq->mark}}" maxlength="4" /></label>
-
-            <label><span>Course id: </span>
-                <input type="number" class="tel-number-field" name="course_id" value="{{$mcq->course_id}}" maxlength="4" /></label>
-
-            <label for="field5"><span>Answer <span class="required">*</span></span>
-                <input type="text" class="input-field" name="correct_answer" value="{{$mcq->correct_answer}}" /></label>
-            <label for="field5"><span>Option 1 <span class="required">*</span></span>
-                <input type="text" class="input-field" name="option1" value="{{$mcq->option1}}" /></label>
-            <label for="field5"><span>Option 2 <span class="required">*</span></span>
-                <input type="text" class="input-field" name="option2" value="{{$mcq->option2}}" /></label>
-            <label for="field5"><span>Option 3 <span class="required">*</span></span>
-                <input type="text" class="input-field" name="option3" value="{{$mcq->option3}}" /></label>
-
-            <button type="submit"> Submit </button>
+            <label for="course">Course: {{ Auth::user()->coordinate->name }}</label>
+            <label for="name">Exam name: <input type="text" name="name"/></label>
+            <label for="num_chapters">Choose chapter:
+                @for($i=1; $i <= $num_chapters; $i++)
+                    <input type="checkbox" name="num_chapters[]" value="{{$i}}" />
+                    <label for="{{$i}}" style="display: inline">{{$i}}</label>
+                @endfor
+            </label>
+            <button type="submit"> Create </button>
         </form>
     </div>
 

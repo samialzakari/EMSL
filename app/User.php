@@ -38,14 +38,18 @@ class User extends Authenticatable
     ];
 
     public function enroll(){
-        return $this->belongsToMany(Section::class,'section_student')->where('role','=','3');
+        return $this->belongsToMany(Section::class,'section_student');
     }
 
     public function teach(){
-        return $this->hasMany(Section::class)->where('role','<','3');
+        return $this->hasMany(Section::class,'fm_id');
     }
 
     public function coordinate(){
-        return $this->hasOne(Course::class)->where('role','=','1');
+        return $this->hasOne(Course::class,'cc_id');
+    }
+
+    public function exams(){
+        return $this->belongsToMany(Exam::class,'exam_student');
     }
 }

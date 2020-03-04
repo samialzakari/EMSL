@@ -14,7 +14,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <a class="dropdown-item" href="https://www.google.com">
+                        <a class="dropdown-item" href="/exam">
                             Generate Exam
                         </a>
                         <a class="dropdown-item" href="{{url('grade')}}">

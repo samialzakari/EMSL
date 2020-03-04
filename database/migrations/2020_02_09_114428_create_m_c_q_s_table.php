@@ -13,7 +13,7 @@ class CreateMCQSTable extends Migration
      */
     public function up()
     {
-        Schema::create('mcqs', function (Blueprint $table) {
+        Schema::create('m_c_q_s', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text ('question');
             $table->integer('chapter_no');
@@ -36,6 +36,6 @@ class CreateMCQSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mcqs');
+        Schema::dropIfExists('m_c_q_s');
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\MCQ;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MCQController extends Controller
 {
@@ -15,6 +17,7 @@ class MCQController extends Controller
     public function index()
     {
         $mcqs= MCQ::all();
+//        $mcqs = DB::table('m_c_q_s')->where('course_id',Auth::user()->coordinate->id);
         return view('/question.index')->with('mcqs', $mcqs);
     }
 
@@ -36,9 +39,9 @@ class MCQController extends Controller
      */
     public function store(Request $request)
     {
-        $mcq = new MCQ(request(['question','chapter_no','mark','correct_answer','option1','option2','option3']));
+        $mcq = new MCQ(request(['question','chapter_no','mark','correct_answer','option1','option2','option3','course_id']));
         $mcq->save();
-       
+
         return redirect('/question/index');
 
     }
@@ -50,8 +53,8 @@ class MCQController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {  
-        
+    {
+
         // return view('question.show', ['mcq' => $mcq]);
         return view('question.show', ['mcq' => MCQ::findOrFail($id)]);
     }
@@ -62,9 +65,9 @@ class MCQController extends Controller
      * @param  \App\MCQ  $mCQ
      * @return \Illuminate\Http\Response
      */
-    public function edit(MCQ $mCQ)
+    public function edit($id)
     {
-        //
+        return view('question.edit',['mcq' => MCQ::findOrFail($id)]);
     }
 
     /**
@@ -74,9 +77,22 @@ class MCQController extends Controller
      * @param  \App\MCQ  $mCQ
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MCQ $mCQ)
+    public function update(Request $request, $id)
     {
-        //
+        $mcq = MCQ::findOrFail($id);
+
+        $mcq->update(request()->validate([
+            'question'=> 'required',
+            'chapter_no' => 'required',
+            'mark' => 'required',
+            'correct_answer' => 'required',
+            'option1' => 'required',
+            'option2' => 'required',
+            'option3' => 'required',
+            'course_id' => 'required'
+        ]));
+
+        return view('question.show',['mcq' => $mcq]);
     }
 
     /**

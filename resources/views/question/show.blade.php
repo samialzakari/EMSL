@@ -38,19 +38,27 @@
 
 
 
-    
+
    <h5>Question: {{$mcq->question}} </h5>
+   <h5> Mark:  {{$mcq->mark}}  </h5>
+   <h5> Course:  {{$mcq->course_id}}  </h5>
+   <h5> Chapter Number:  {{$mcq->chapter_no}}  </h5>
    <br>
-   <h5> Correct answer: <label style="color:#32CD32">{{$mcq->correct_answer}} </lable></h5>
+   <h5> Correct answer: <label style="color:#32CD32">{{$mcq->correct_answer}} </label></h5>
 
-   <h5> Option 1:  <label style="color:red">{{$mcq->option1}}  </lable></h5>
-   <h5> Option 2:  <label style="color:red">{{$mcq->option2}}  </lable></h5>
-   <h5> Option 3:  <label style="color:red">{{$mcq->option3}}  </lable></h5>
-   
+   <h5> Option 1:  <label style="color:red">{{$mcq->option1}}  </label></h5>
+   <h5> Option 2:  <label style="color:red">{{$mcq->option2}}  </label></h5>
+   <h5> Option 3:  <label style="color:red">{{$mcq->option3}}  </label></h5>
+
     <br>
     <br>
-<a href="" class="likeabutton">Edit </a>  &nbsp;&nbsp; <a href="question/{id}/delete" class="likeabutton2">Delete</a>
+<a href="/question/{{$mcq->id}}/edit" class="likeabutton">Edit </a>
 
+   <form action="" method="post" style="display: inline">
+       @method('DELETE')
+       @csrf
+       <input type="submit" value="Delete" class="likeabutton2"/>
+   </form>
 
 
 @endsection

@@ -13,8 +13,8 @@
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
-                    @endif   
-                    <a class="dropdown-item" href="https://www.google.com">
+                    @endif
+                    <a class="dropdown-item" href="/exam">
                                     Generate Exam
                                     </a>
                     <a class="dropdown-item" href="{{url('grade')}}">
