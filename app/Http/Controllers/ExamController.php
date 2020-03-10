@@ -17,7 +17,8 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $exams= Exam::all();
+//        $exams= Exam::all();
+        $exams = Exam::where('course_id', Auth::user()->coordinate->id)->get();
         return view('/exam.index')->with('exams', $exams);
     }
 

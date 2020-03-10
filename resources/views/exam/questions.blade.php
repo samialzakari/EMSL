@@ -10,7 +10,7 @@
         <form method="POST" action="/exam" >
             @csrf
             <label for="{{$exam->id}}">Exam: {{ $exam->name }}</label>
-            <label for="{{$exam->id}}"><input type="text" name="exam" value="{{$exam->id}}" /></label>
+            <label for="{{$exam->id}}"><input type="hidden" name="exam" value="{{$exam->id}}" /></label>
             <label for="question">Choose questions:
                 @foreach( $mcqs as $mcq)
                     <input type="checkbox" name="questions[]" value="{{$mcq->id}}" />

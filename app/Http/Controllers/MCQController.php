@@ -16,8 +16,8 @@ class MCQController extends Controller
      */
     public function index()
     {
-        $mcqs= MCQ::all();
-//        $mcqs = DB::table('m_c_q_s')->where('course_id',Auth::user()->coordinate->id);
+//        $mcqs= MCQ::all();
+        $mcqs = MCQ::where('course_id', Auth::user()->coordinate->id)->get();
         return view('/question.index')->with('mcqs', $mcqs);
     }
 
