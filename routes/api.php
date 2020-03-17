@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
+|--------------------------------------------------------------------------
 |--------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
@@ -18,3 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/Student', 'StudentController@index')->name('Student')->middleware('Student');
+
+Route::middleware(['auth:api', 'Student'])->group( function (){
+
+});
+
+Route::get('course', 'Api\CourseApiController@index');
+Route::get('course/{id}','Api\CourseApiController@show');
+Route::get('course/{id}/exams','Api\ExamApiController@index');
+Route::get('exam/{id}','Api\ExamApiController@show');
+Route::get('exam/{id}/questions','Api\MCQApiController@index');
