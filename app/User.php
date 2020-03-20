@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
     public function enroll(){
-        return $this->belongsToMany(Section::class,'section_student');
+        return $this->belongsToMany(Section::class,'section_student','student_id','section_id');
     }
 
     public function teach(){

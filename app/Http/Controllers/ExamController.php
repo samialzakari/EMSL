@@ -43,7 +43,7 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        $exam = new Exam(request(['name']));
+        $exam = new Exam(request(['name','date']));
         $exam->mark = 0;
         $exam->course_id = Auth::user()->coordinate->id;
         $exam->save();

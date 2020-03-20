@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\SectionCollection;
+use App\Http\Resources\SectionResource;
 use App\Section;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,7 +17,8 @@ class SectionApiController extends Controller
      */
     public function index()
     {
-        //
+        $sections = Auth::user()->enroll();
+        return new SectionCollection($sections);
     }
 
     /**
@@ -45,9 +48,10 @@ class SectionApiController extends Controller
      * @param  \App\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function show(Section $section)
+    public function show($id)
     {
-        //
+        $section = Section::findOrFail($id);
+        return new SectionResource($section);
     }
 
     /**

@@ -69,8 +69,14 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth 
-                        <a href="{{ url('/home') }}">Home</a>
+                    @auth
+                        @if(Auth::user()->role == 1)
+                            <a href="{{ url('/CC') }}">Home</a>
+                        @elseif(Auth::user()->role == 2)
+                            <a href="{{ url('/FM') }}">Home</a>
+                        @elseif(Auth::user()->role == 4)
+                            <a href="{{ url('/admin') }}">Home</a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -91,7 +97,7 @@
                 </div>
 
                 <div class="links">
-                
+
                 </div>
             </div>
         </div>
