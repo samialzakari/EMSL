@@ -29,9 +29,6 @@
     background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
     color:white;
 }
-
-
-
 </style>
 @section('content')
 

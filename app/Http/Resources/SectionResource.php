@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use App\Course;
+use App\User;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SectionResource extends JsonResource

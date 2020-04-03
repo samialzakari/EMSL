@@ -3,7 +3,7 @@
 @auth
 
 @section('content')
-<h4>Choose an exam to grade: </h4>
+<h4>Scan the QR Code </h4>
 
 {{--@foreach ($exams as $exam)--}}
 
@@ -15,8 +15,8 @@
 {{--@endforeach--}}
 
 <div class="visible-print text-center">
-    {!! QrCode::size(500)->generate('Ok'); !!}
-    <p>Scan me to return to the original page.</p>
+    {!! QrCode::size(500)->generate('Hello World'); !!}
+
 </div>
 
 
@@ -24,7 +24,7 @@
 
 @else
 
-    <h1>you r not allowed here</h1>
+{{--    <h1>you r not allowed here</h1>--}}
 
 
 @endauth

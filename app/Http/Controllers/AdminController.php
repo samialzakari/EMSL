@@ -22,6 +22,7 @@ class AdminController extends Controller
     public function course_create(Request $request){
         $cc = User::findOrFail(request('cc_id'));
         $cc->role = 1;
+        $cc->save();
         $course = new Course($request->all());
         $course->save();
 
