@@ -19,7 +19,7 @@ class CourseApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $courses = Auth::user()->enroll()->course;
         return new CourseCollection($courses);

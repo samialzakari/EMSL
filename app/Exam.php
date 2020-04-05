@@ -19,6 +19,16 @@ class Exam extends Model
     }
 
     public function students(){
-        return $this->belongsToMany(User::class,'exam_student');
+        return $this->belongsToMany(User::class,'exam_student', 'exam_id', 'student_id');
+    }
+
+    public function calculateMarks(){
+        $mcqs = $this->mcqs;
+        $count = 0;
+        foreach ($mcqs as $mcq){
+            $count += $mcq->mark;
+        }
+        $this->mark = $count;
+        $this->save();
     }
 }

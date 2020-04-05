@@ -27,7 +27,6 @@ class CreateExamsTable extends Migration
         Schema::create('exam_mcq', function (Blueprint $table){
            $table->unsignedBigInteger('exam_id');
            $table->unsignedBigInteger('mcq_id');
-           $table->integer('mark')->nullable();
 
             $table->unique(['exam_id','mcq_id']);
 

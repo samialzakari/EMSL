@@ -19,8 +19,8 @@ class SectionResource extends JsonResource
     {
         return [
             'section_id' => $this->id,
-            'section_fm' => User::find($this->fm_id),
-            'section_course' => Course::find($this->course_id),
+            'section_course' => $this->course->name,
+            'section_fm' => User::find($this->fm_id)->name,
         ];
     }
 }

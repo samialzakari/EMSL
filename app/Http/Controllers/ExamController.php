@@ -114,6 +114,7 @@ class ExamController extends Controller
             $exam->mcqs()->attach($mcq);
             $exam->save();
         }
+        $exam->calculateMarks();
         return redirect('/exam');
     }
 

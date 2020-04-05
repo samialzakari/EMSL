@@ -2,85 +2,42 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UserResource;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Validator;
 
 class UserApiController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * login api
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
-    {
-        //
+    public function login(Request $request){
+        if(Auth::attempt($request->only('email', 'password')) && Auth::user()->role == 3){
+            $user = Auth::user();
+            $token = $user->createToken('MyApp')->accessToken;
+            return response()->json(['data' => new UserResource(Auth::user()) ,'token' => $token], 200);
+        }
+        else{
+            return response()->json(['error'=>'Unauthorised'], 401);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+   public function logout(Request $request){
+       $accessToken = Auth::user()->token();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+       DB::table('oauth_refresh_tokens')
+           ->where('access_token_id', $accessToken->id)
+           ->update(['revoked' => true]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
+       $accessToken->revoke();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
-    }
+       return response()->json([], 204);
+   }
 }

@@ -89,7 +89,7 @@
             @csrf
             <label for="course">Course: {{ Auth::user()->coordinate->name }}</label>
             <label for="name">Exam name: <input type="text" name="name" required/></label>
-            <label for="date">Exam date: <input type="date" name="date" required/></label>
+            <label for="date">Exam date: <input type="date" name="date" min="{{date("Y-m-d")}}" required/></label>
             <label for="num_chapters">Choose chapter:
                 @for($i=1; $i <= $num_chapters; $i++)
                     <input type="checkbox" name="num_chapters[]" value="{{$i}}" />

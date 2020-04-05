@@ -2,9 +2,12 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
+use App\Course;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class ExamCollection extends ResourceCollection
+class ExamCollection extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -14,6 +17,12 @@ class ExamCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'exam_id' => $this->id,
+            'exam_name' => $this->name,
+            'exam_mark' => $this->mark,
+            'exam_date' => $this->date,
+            'exam_course' => $this->course->name,
+        ];
     }
 }

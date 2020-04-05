@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\ExamCollection;
 
 class UserResource extends JsonResource
 {
@@ -20,8 +21,8 @@ class UserResource extends JsonResource
             'student_id' => $this->id,
             'student_name' => $this->name,
             'student_email' => $this->email,
-            'student_sections' => SectionResource::collection(DB::table('section_student')->where('student_id',Auth::user()->id)),
-            'student_exams' => ExamResource::collection(DB::table('exam_student')->where('student_id',Auth::user()->id)),
+            'student_schedule' => $this->schedule(),
+            'student_exams' => ExamResource::collection($this->exams),
         ];
     }
 }
