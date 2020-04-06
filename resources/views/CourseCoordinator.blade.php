@@ -21,7 +21,7 @@
                             Grade an exam
                         </a>
                         <a class="dropdown-item" href="/question/index">
-                            Questions
+                            Question Bank
                         </a>
                         <a class="dropdown-item" href="/schedule">
                             View Schedule

@@ -23,22 +23,43 @@ a:hover{
 }
 </style>
 
+{{--@section('content')--}}
+
+{{--<a href="/question/addQuestion" class="likeabutton">Add a new question</a>--}}
+
+{{--<h4>Choose a question: </h4>--}}
+
+{{--@foreach ($mcqs as $mcq)--}}
+{{--    <a href="/question/{{$mcq->id}}/">Question: {{$mcq->question}} </a>--}}
+{{--    <br><br>--}}
+{{--@endforeach--}}
+
+{{--@endsection--}}
+
 @section('content')
 
-<a href="/question/addQuestion" class="likeabutton">Add a new question</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card" >
+                    <div class="card-header" style="background:rgba(88,152,164,1)">{{\Illuminate\Support\Facades\Auth::user()->coordinate->name}} Question Bank</div>
 
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
-<h4>Choose a question: </h4>
+                        <a href="/question/addQuestion" class="dropdown-item" style="font-weight: bold">Add a New Question</a>
 
-@foreach ($mcqs as $mcq)
+                        @foreach ($mcqs as $mcq)
+                            <a href="/question/{{$mcq->id}}/" class="dropdown-item">Question: {{$mcq->question}} </a>
+                        @endforeach
 
-    
-    <a href="/question/{{$mcq->id}}/">Question: {{$mcq->question}} </a>
-    
-    <br>
-    <br>
-@endforeach
-
-
-
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

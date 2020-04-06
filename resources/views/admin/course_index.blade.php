@@ -25,7 +25,6 @@
                         </a>
                         @endforeach
 
-                    <!--You are logged in! {{Auth::user()->name}}-->
                     </div>
                 </div>
             </div>

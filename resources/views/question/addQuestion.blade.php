@@ -80,27 +80,119 @@
 	color: #fff;
 }
 </style>
+{{--@section('content')--}}
+{{--<div class="form-style-2">--}}
+{{--    <div class="form-style-2-heading">Fill out the question information below:</div>--}}
+{{--    <form method="POST" action="" >--}}
+{{--        @csrf--}}
+{{--        <label for="question"><span>Question: <span class="required">*</span></span><input type="text" class="input-field" name="question" value="{{old('question')}}" required/></label>--}}
+
+{{--        <label><span>Chapter number</span><input type="text" class="tel-number-field" name="chapter_no" value="{{old('chapter_no')}}" maxlength="4" required/></label>--}}
+{{--        <label><span>Mark</span><input type="text" class="tel-number-field" name="mark" value="" maxlength="4" required/></label>--}}
+{{--        <label><input type="hidden" class="tel-number-field" name="course_id" value="{{Auth::user()->coordinate->id}}" maxlength="4" /></label>--}}
+
+{{--        <label for="field5"><span>Answer <span class="required">*</span></span><input type="text" class="input-field" name="correct_answer" value="{{old('correct_answer')}}" required/></label>--}}
+{{--        <label for="field5"><span>Option 1 <span class="required">*</span></span><input type="text" class="input-field" name="option1" value="{{old('option1')}}" required/></label>--}}
+{{--        <label for="field5"><span>Option 2 </span><input type="text" class="input-field" name="option2" value="{{old('option2')}}" /></label>--}}
+{{--        <label for="field5"><span>Option 3 </span><input type="text" class="input-field" name="option3" value="{{old('option3')}}" /></label>--}}
+
+{{--        <button type="submit"> Submit </button>--}}
+{{--    </form>--}}
+{{--</div>--}}
+
+{{--@endsection--}}
+
 @section('content')
 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card" >
+                    <div class="card-header" style="background:rgba(88,152,164,1)">Fill out the question information below:</div>
+
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <form method="POST" action="" >
+                            @csrf
+                            <input type="hidden" class="tel-number-field" name="course_id" value="{{Auth::user()->coordinate->id}}" />
+
+                            <div class="form-group row">
+                                <label for="question" class="col-md-4 col-form-label text-md-right">Question:</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="question" value="{{old('question')}}" autofocus required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="chapter_no" class="col-md-4 col-form-label text-md-right">Chapter Number:</label>
+
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" name="mark" min="0" max="{{\Illuminate\Support\Facades\Auth::user()->coordinate->num_chapters}}" value="{{old('chapter_no')}}" autofocus required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="mark" class="col-md-4 col-form-label text-md-right">Mark:</label>
+
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" name="mark" min="0" max="99" value="{{old('mark')}}" autofocus required>
+                                </div>
+                            </div>
 
 
-<div class="form-style-2">
-    <div class="form-style-2-heading">Fill out the question information below:</div>
-    <form method="POST" action="" >
-        @csrf
-        <label for="question"><span>Question: <span class="required">*</span></span><input type="text" class="input-field" name="question" value="{{old('question')}}" required/></label>
+                                <label>Note: If the answers is True/False just fill correct answer and the first option</label>
 
-        <label><span>Chapter number</span><input type="text" class="tel-number-field" name="chapter_no" value="{{old('chapter_no')}}" maxlength="4" required/></label>
-        <label><span>Mark</span><input type="text" class="tel-number-field" name="mark" value="" maxlength="4" required/></label>
-        <label><input type="hidden" class="tel-number-field" name="course_id" value="{{Auth::user()->coordinate->id}}" maxlength="4" /></label>
 
-        <label for="field5"><span>Answer <span class="required">*</span></span><input type="text" class="input-field" name="correct_answer" value="{{old('correct_answer')}}" required/></label>
-        <label for="field5"><span>Option 1 <span class="required">*</span></span><input type="text" class="input-field" name="option1" value="{{old('option1')}}" required/></label>
-        <label for="field5"><span>Option 2 </span><input type="text" class="input-field" name="option2" value="{{old('option2')}}" /></label>
-        <label for="field5"><span>Option 3 </span><input type="text" class="input-field" name="option3" value="{{old('option3')}}" /></label>
+                            <div class="form-group row">
+                                <label for="correct_answer" class="col-md-4 col-form-label text-md-right">Correct answer:</label>
 
-        <button type="submit"> Submit </button>
-    </form>
-</div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="correct_answer" value="{{old('correct_answer')}}" autofocus required>
+                                </div>
+                            </div>
 
+                            <div class="form-group row">
+                                <label for="option1" class="col-md-4 col-form-label text-md-right">First option:</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="option1" value="{{old('option1')}}" autofocus required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="option2" class="col-md-4 col-form-label text-md-right">Second option:</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="option2" value="{{old('option2')}}" autofocus required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="option3" class="col-md-4 col-form-label text-md-right">Third option:</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="option3" value="{{old('option3')}}" autofocus required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

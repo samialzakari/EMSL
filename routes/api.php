@@ -30,11 +30,3 @@ Route::middleware(['auth:api', 'Student'])->group( function (){
     Route::post('logout','Api\UserApiController@logout');
 
 });
-
-Route::get('course', 'Api\CourseApiController@index');
-Route::get('course/{id}','Api\CourseApiController@show');
-Route::get('course/{id}/exams','Api\ExamApiController@index');
-Route::get('exam/{id}','Api\ExamApiController@show');
-Route::get('exam/{id}/questions','Api\MCQApiController@index');
-//Route::get('section', 'Api\SectionApiController@index');
-Route::get('section/{id}', 'Api\SectionApiController@show');

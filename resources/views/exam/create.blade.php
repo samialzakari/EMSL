@@ -80,24 +80,92 @@
         color: #fff;
     }
 </style>
+{{--@section('content')--}}
+
+
+{{--    <div class="form-style-2">--}}
+{{--        <div class="form-style-2-heading">Fill out the exam information below:</div>--}}
+{{--        <form method="POST" action="" >--}}
+{{--            @csrf--}}
+{{--            <label for="course">Course: {{ Auth::user()->coordinate->name }}</label>--}}
+{{--            <label for="name">Exam name: <input type="text" name="name" required/></label>--}}
+{{--            <label for="date">Exam date: <input type="date" name="date" min="{{date("Y-m-d")}}" required/></label>--}}
+{{--            <label for="num_chapters">Choose chapter:--}}
+{{--                @for($i=1; $i <= $num_chapters; $i++)--}}
+{{--                    <input type="checkbox" name="num_chapters[]" value="{{$i}}" />--}}
+{{--                    <label for="{{$i}}" style="display: inline">{{$i}}</label>--}}
+{{--                @endfor--}}
+{{--            </label>--}}
+{{--            <button type="submit"> Create </button>--}}
+{{--        </form>--}}
+{{--    </div>--}}
+
+{{--@endsection--}}
+
 @section('content')
 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card" >
+                    <div class="card-header" style="background:rgba(88,152,164,1)">Fill out the exam information below:</div>
 
-    <div class="form-style-2">
-        <div class="form-style-2-heading">Fill out the exam information below:</div>
-        <form method="POST" action="" >
-            @csrf
-            <label for="course">Course: {{ Auth::user()->coordinate->name }}</label>
-            <label for="name">Exam name: <input type="text" name="name" required/></label>
-            <label for="date">Exam date: <input type="date" name="date" min="{{date("Y-m-d")}}" required/></label>
-            <label for="num_chapters">Choose chapter:
-                @for($i=1; $i <= $num_chapters; $i++)
-                    <input type="checkbox" name="num_chapters[]" value="{{$i}}" />
-                    <label for="{{$i}}" style="display: inline">{{$i}}</label>
-                @endfor
-            </label>
-            <button type="submit"> Create </button>
-        </form>
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <form method="POST" action="" >
+                            @csrf
+                            <div class="form-group row">
+                                <label for="course" class="col-md-4 col-form-label text-md-right">Course:</label>
+
+                                <div class="col-md-5">
+                                    <label for="course" class="col-md-4 col-form-label text-md-left">{{ Auth::user()->coordinate->name }}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Exam name:</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="name" autofocus required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="date" class="col-md-4 col-form-label text-md-right">Exam date:</label>
+
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" name="date" min="{{date("Y-m-d")}}" autofocus required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="num_chapters" class="col-md-4 col-form-label text-md-right">Choose chapters:</label>
+
+                                <div class="col-md-6">
+                                    @for($i=1; $i <= $num_chapters; $i++)
+                                        <input type="checkbox" name="num_chapters[]" value="{{$i}}" autofocus required>
+                                        <label for="{{$i}}" >{{$i}}</label>
+                                    @endfor
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Create
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 @endsection
