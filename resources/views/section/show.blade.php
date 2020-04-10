@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header" style="background:rgba(88,152,164,1)">Dashboard, Faculty member</div>
+                    <div class="card-header" style="background:rgba(88,152,164,1)">Section Page</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -15,11 +15,10 @@
                             </div>
                         @endif
 
-                        @foreach($sections as $section)
-                                <a class="dropdown-item" href="/section/{{$section->id}}">
-                                    Course: {{$section->course->name}}, Section: {{$section->id}}
-                                </a>
-                        @endforeach
+                            <a class="dropdown-item">Course: {{$section->course->name}}</a>
+                            <a class="dropdown-item">Section: {{$section->id}}</a>
+                            <a class="dropdown-item" href="/section/{{$section->id}}/student" style="font-weight: bold">Section's Students ▶</a>
+                            <a class="dropdown-item" href="/section/{{$section->id}}/exam" style="font-weight: bold">Section's Exams ▶</a>
 
                     </div>
                 </div>

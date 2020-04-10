@@ -92,7 +92,7 @@ class MCQController extends Controller
             'course_id' => 'required'
         ]));
 
-        return view('question.show',['mcq' => $mcq]);
+        return redirect('/question/'.$mcq->id);
     }
 
     /**

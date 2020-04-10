@@ -15,18 +15,18 @@
                             </div>
                         @endif
                         <a class="dropdown-item" href="/exam">
-                            Generate Exam
-                        </a>
-                        <a class="dropdown-item" href="{{url('grade')}}">
-                            Grade an exam
+                            {{$course}} Exams
                         </a>
                         <a class="dropdown-item" href="/question/index">
-                            Question Bank
+                            {{$course}} Question Bank
                         </a>
-                        <a class="dropdown-item" href="/schedule">
-                            View Schedule
-                        </a>
-                    <!--You are logged in! {{Auth::user()->name}}-->
+
+                        @foreach($sections as $section)
+                            <a class="dropdown-item" href="/section/{{$section->id}}">
+                                Course: {{$section->course->name}}, Section: {{$section->id}}
+                            </a>
+                        @endforeach
+
                     </div>
                 </div>
             </div>

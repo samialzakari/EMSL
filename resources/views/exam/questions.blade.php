@@ -54,7 +54,7 @@
 
                                 <div class="col-md-6">
                                     @foreach($mcqs as $mcq)
-                                        <input type="checkbox" name="questions[]" value="{{$mcq->id}}" autofocus required>
+                                        <input type="checkbox" name="questions[]" value="{{$mcq->id}}" autofocus>
                                         <label for="{{$mcq->id}}" class="col-md-6 col-form-label text-md-left">{{$mcq->question}}</label>
                                         <br>
                                     @endforeach

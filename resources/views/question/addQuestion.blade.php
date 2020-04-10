@@ -133,7 +133,7 @@
                                 <label for="chapter_no" class="col-md-4 col-form-label text-md-right">Chapter Number:</label>
 
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" name="mark" min="0" max="{{\Illuminate\Support\Facades\Auth::user()->coordinate->num_chapters}}" value="{{old('chapter_no')}}" autofocus required>
+                                    <input type="number" class="form-control" name="chapter_no" min="0" max="{{\Illuminate\Support\Facades\Auth::user()->coordinate->num_chapters}}" value="{{old('chapter_no')}}" autofocus required>
                                 </div>
                             </div>
 

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Exam;
 use App\Http\Controllers\Controller;
+use App\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +16,7 @@ class ExamController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -25,7 +28,7 @@ class ExamController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -39,7 +42,7 @@ class ExamController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(Request $request)
     {
@@ -63,7 +66,7 @@ class ExamController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Exam  $exam
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -116,6 +119,51 @@ class ExamController extends Controller
         }
         $exam->calculateMarks();
         return redirect('/exam');
+    }
+
+    public function section_index($id){
+        $section = Section::findOrFail($id);
+        $course = Course::findOrFail($section->course->id);
+        return view('section.exam.index',[
+            'section' => $section,
+            'course' => $course->name,
+            'exams' => $course->exams->sortByDesc('date'),
+        ]);
+    }
+
+    public function section_show($id, $exam_id){
+        $exam = Exam::findOrFail($exam_id);
+        $section = Section::findOrFail($id);
+        $students = $section->students;
+        $marks = null;
+        if($students){
+            $stu = array();
+            foreach ($students as $student){
+                if($exam->students->contains($student)) {$stu = Arr::add($stu,$student->id,$student->id);}
+            }
+            $stu = Arr::flatten($stu);
+            $marks = DB::table('exam_student')->where('exam_id',$exam_id)->whereIn('student_id',$stu)->get();
+        }
+        $isTaken = ($marks->isEmpty()) ? false : true;
+        $avg = 0; $max = 0; $min = 0;
+        if($isTaken){
+            $avg = $marks->avg('student_mark');
+            $max = $marks->max('student_mark');
+            $min = $marks->min('student_mark');
+        }
+        return view('section.exam.show', [
+            'isTaken' => $isTaken,
+            'section' => $section->id,
+            'exam' => $exam,
+            'avg' => $avg,
+            'max' => $max,
+            'min' => $min,
+        ]);
+    }
+
+    public function open($id,$exam_id){
+        $url = '/section/'.$id.'/exam/'.$exam_id;
+        return view('section.exam.open',['exam' => $exam_id, 'url' => $url]);
     }
 
 

@@ -19,12 +19,12 @@
 
                         <form method="POST" action="/admin/course" >
                             @csrf
-                            <label for="name">Course name: <input type="text" name="name"/></label> <br>
-                            <label for="department">Department: <input type="text" name="department"/></label> <br>
-                            <label for="num_chapters">Number of chapters: <input type="number" name="num_chapters"/></label>
+                            <label for="name">Course name: <input type="text" name="name" value="{{old('name')}}" required/></label> <br>
+                            <label for="department">Department: <input type="text" name="department" value="{{old('department')}}" required/></label> <br>
+                            <label for="num_chapters">Number of chapters: <input type="number" name="num_chapters" value="{{old('num_chapters')}}" required/></label>
                             <br>
                             <label for="cc_id">Choose course coordinator:
-                                <select name="cc_id">
+                                <select name="cc_id" required>
                                     @foreach($fms as $fm)
                                         <option value="{{$fm->id}}">{{$fm->name}}</option>
                                     @endforeach

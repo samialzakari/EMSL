@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header" style="background:rgba(88,152,164,1)">Dashboard, Faculty member</div>
+                    <div class="card-header" style="background:rgba(88,152,164,1)">Scan the QR Code</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -15,11 +15,13 @@
                             </div>
                         @endif
 
-                        @foreach($sections as $section)
-                                <a class="dropdown-item" href="/section/{{$section->id}}">
-                                    Course: {{$section->course->name}}, Section: {{$section->id}}
-                                </a>
-                        @endforeach
+                        <div class="visible-print text-center">
+                            {!! QrCode::size(480)->generate('exam/'.$exam); !!}
+                        </div>
+
+                        <div style="text-align: center">
+                            <button type="button" onclick="window.location.href = '{{$url}}'" > Done </button>
+                        </div>
 
                     </div>
                 </div>

@@ -148,7 +148,7 @@
 
                                 <div class="col-md-6">
                                     @for($i=1; $i <= $num_chapters; $i++)
-                                        <input type="checkbox" name="num_chapters[]" value="{{$i}}" autofocus required>
+                                        <input type="checkbox" name="num_chapters[]" value="{{$i}}" autofocus>
                                         <label for="{{$i}}" >{{$i}}</label>
                                     @endfor
                                 </div>

@@ -12,6 +12,7 @@
 */
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,44 +21,37 @@ Route::get('/', function () {
 
 Auth::routes();
 
- Route::get('/grade', function(){
-     return view('/grade');
- })->name('grade');
 
 Route::get('/CC', 'CourseCoordinatorController@index')->name('CC')->middleware('CourseCoordinator');
-Route::get('/FM', 'FacultyMemberController@index')->name('FM')->middleware('FacultyMember');
+Route::get('/FM', 'SectionController@index')->name('FM')->middleware('FacultyMember');
 
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-//Route::get('/grade', 'ExamController@index');
-
-
-
 
 Route::get('/schedule', function(){
          return view('/schedule'); });
 
 
+Route::middleware('CourseCoordinator')->group( function (){
+    Route::get('/question/index', 'MCQController@index');
+    Route::post('/question/addQuestion', 'MCQController@store');
+    Route::get('/question/addQuestion', 'MCQController@create');
+    Route::get('/question/{id}', 'MCQController@show');
+    Route::delete('/question/{id}', 'MCQController@destroy');
+    Route::get('/question/{id}/edit', 'MCQController@edit');
+    Route::put('/question/{id}/edit', 'MCQController@update');
 
 
-Route::get('/question/index', 'MCQController@index');
-Route::post('/question/addQuestion', 'MCQController@store');
-Route::get('/question/addQuestion', 'MCQController@create');
-Route::get('/question/{id}', 'MCQController@show');
-Route::delete('/question/{id}', 'MCQController@destroy');
-Route::get('question/{id}/edit', 'MCQController@edit');
-Route::put('question/{id}/edit', 'MCQController@update');
+    Route::get('/exam', 'ExamController@index');
+    Route::post('/exam', 'ExamController@select');
+    Route::get('/exam/create', 'ExamController@create');
+    Route::post('/exam/create', 'ExamController@store');
+    Route::get('/exam/{id}', 'ExamController@show');
+});
 
 
-Route::get('/exam', 'ExamController@index');
-Route::post('/exam', 'ExamController@select');
-Route::get('/exam/create', 'ExamController@create');
-Route::post('/exam/create', 'ExamController@store');
-Route::get('/exam/{id}', 'ExamController@show');
-
-
-Route::middleware(['admin'])->group( function (){
+Route::middleware('admin')->group( function (){
     Route::get('/admin', 'AdminController@index');
 
     Route::get('/admin/course','AdminController@course_index');
@@ -89,3 +83,12 @@ Route::middleware(['admin'])->group( function (){
     });
     Route::post('/admin/student/{id}', 'AdminController@student_section');
 });
+
+
+//Route::get('/section', 'SectionController@index');
+Route::get('/section/{id}', 'SectionController@show');
+Route::get('/section/{id}/exam', 'ExamController@section_index');
+Route::get('/section/{id}/exam/{exam_id}', 'ExamController@section_show');
+Route::get('/section/{id}/exam/{exam_id}/qrcode', 'ExamController@open');
+Route::get('/section/{id}/student', 'StudentController@index');
+Route::get('/section/{id}/student/{student_id}','StudentController@show');
