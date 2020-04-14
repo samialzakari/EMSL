@@ -80,27 +80,14 @@
         color: #fff;
     }
 </style>
-{{--@section('content')--}}
 
-
-{{--    <div class="form-style-2">--}}
-{{--        <div class="form-style-2-heading">Fill out the exam information below:</div>--}}
-{{--        <form method="POST" action="" >--}}
-{{--            @csrf--}}
-{{--            <label for="course">Course: {{ Auth::user()->coordinate->name }}</label>--}}
-{{--            <label for="name">Exam name: <input type="text" name="name" required/></label>--}}
-{{--            <label for="date">Exam date: <input type="date" name="date" min="{{date("Y-m-d")}}" required/></label>--}}
-{{--            <label for="num_chapters">Choose chapter:--}}
-{{--                @for($i=1; $i <= $num_chapters; $i++)--}}
-{{--                    <input type="checkbox" name="num_chapters[]" value="{{$i}}" />--}}
-{{--                    <label for="{{$i}}" style="display: inline">{{$i}}</label>--}}
-{{--                @endfor--}}
-{{--            </label>--}}
-{{--            <button type="submit"> Create </button>--}}
-{{--        </form>--}}
-{{--    </div>--}}
-
-{{--@endsection--}}
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li><a href="/CC">Home</a></li>
+        <li><a href="/exam">{{\Illuminate\Support\Facades\Auth::user()->coordinate->name}} Exams</a></li>
+        <li>Create Exam</li>
+    </ul>
+@endsection
 
 @section('content')
 
@@ -148,8 +135,11 @@
 
                                 <div class="col-md-6">
                                     @for($i=1; $i <= $num_chapters; $i++)
+                                        @if($i%6 == 0)
+                                            <br>
+                                        @endif
                                         <input type="checkbox" name="num_chapters[]" value="{{$i}}" autofocus>
-                                        <label for="{{$i}}" >{{$i}}</label>
+                                        <label for="{{$i}}" style="margin-right: 15px">{{$i}}</label>
                                     @endfor
                                 </div>
                             </div>

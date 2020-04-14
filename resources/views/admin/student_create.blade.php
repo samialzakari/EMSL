@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li><a href="/admin">Home</a></li>
+        <li><a href="/admin/student">Students</a></li>
+        <li>Register Student</li>
+    </ul>
+@endsection
+
 @section('content')
 
     <div class="container">

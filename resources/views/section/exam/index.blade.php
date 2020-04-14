@@ -13,6 +13,15 @@
 
     tr:hover {background-color:#f5f5f5;}
 </style>
+
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li><a href="/FM">Home</a></li>
+        <li><a href="/section/{{$section->id}}">Section {{$section->id}}</a></li>
+        <li>Exams</li>
+    </ul>
+@endsection
+
 @section('content')
 
     <div class="container">

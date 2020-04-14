@@ -20,7 +20,33 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <style>
+        ul.breadcrumb {
+            padding: 10px 16px;
+            list-style: none;
+            background-color: #eee;
+        }
+        ul.breadcrumb li:first-child{
+            margin-left: 10.3%;
+        }
+        ul.breadcrumb li {
+            display: inline;
+            font-size: 1rem;
+        }
+        ul.breadcrumb li+li:before {
+            padding: 8px;
+            color: black;
+            content: "/\00a0";
+        }
+        ul.breadcrumb li a {
+            color: #0275d8;
+            text-decoration: none;
+        }
+        ul.breadcrumb li a:hover {
+            color: #01447e;
+            text-decoration: underline;
+        }
+    </style>
 
 </head>
 
@@ -74,7 +100,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="https://www.google.com">
+                                    <a class="dropdown-item" href="">
                                         Change profile picture
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -89,11 +115,13 @@
                                     </form>
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
+        @yield('breadcrumb')
 
         <main class="py-4">
             @yield('content')

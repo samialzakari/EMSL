@@ -30,6 +30,15 @@
         color:white;
     }
 </style>
+
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li><a href="/admin">Home</a></li>
+        <li><a href="/admin/course">Courses</a></li>
+        <li>{{$course->name}}</li>
+    </ul>
+@endsection
+
 @section('content')
 
     <div class="container">

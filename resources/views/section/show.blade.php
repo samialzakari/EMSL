@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li><a href="/FM">Home</a></li>
+        <li>Section {{$section->id}}</li>
+    </ul>
+@endsection
+
 @section('content')
 
     <div class="container">

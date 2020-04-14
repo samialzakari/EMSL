@@ -80,27 +80,14 @@
 	color: #fff;
 }
 </style>
-{{--@section('content')--}}
-{{--<div class="form-style-2">--}}
-{{--    <div class="form-style-2-heading">Fill out the question information below:</div>--}}
-{{--    <form method="POST" action="" >--}}
-{{--        @csrf--}}
-{{--        <label for="question"><span>Question: <span class="required">*</span></span><input type="text" class="input-field" name="question" value="{{old('question')}}" required/></label>--}}
 
-{{--        <label><span>Chapter number</span><input type="text" class="tel-number-field" name="chapter_no" value="{{old('chapter_no')}}" maxlength="4" required/></label>--}}
-{{--        <label><span>Mark</span><input type="text" class="tel-number-field" name="mark" value="" maxlength="4" required/></label>--}}
-{{--        <label><input type="hidden" class="tel-number-field" name="course_id" value="{{Auth::user()->coordinate->id}}" maxlength="4" /></label>--}}
-
-{{--        <label for="field5"><span>Answer <span class="required">*</span></span><input type="text" class="input-field" name="correct_answer" value="{{old('correct_answer')}}" required/></label>--}}
-{{--        <label for="field5"><span>Option 1 <span class="required">*</span></span><input type="text" class="input-field" name="option1" value="{{old('option1')}}" required/></label>--}}
-{{--        <label for="field5"><span>Option 2 </span><input type="text" class="input-field" name="option2" value="{{old('option2')}}" /></label>--}}
-{{--        <label for="field5"><span>Option 3 </span><input type="text" class="input-field" name="option3" value="{{old('option3')}}" /></label>--}}
-
-{{--        <button type="submit"> Submit </button>--}}
-{{--    </form>--}}
-{{--</div>--}}
-
-{{--@endsection--}}
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li><a href="/CC">Home</a></li>
+        <li><a href="/question/index">{{\Illuminate\Support\Facades\Auth::user()->coordinate->name}} Question Bank</a></li>
+        <li>Add Question</li>
+    </ul>
+@endsection
 
 @section('content')
 

@@ -80,41 +80,15 @@
         color: #fff;
     }
 </style>
-{{--@section('content')--}}
 
-
-
-{{--    <div class="form-style-2">--}}
-{{--        <div class="form-style-2-heading">Fill out the question information below:</div>--}}
-{{--        <form method="POST" action="" >--}}
-{{--            @method('PUT')--}}
-{{--            @csrf--}}
-{{--            <label for="question"><span>Question: <span class="required">*</span></span>--}}
-{{--                <input type="text" class="input-field" name="question" value="{{ $mcq->question }}" /></label>--}}
-
-{{--            <label><span>Chapter number</span>--}}
-{{--                <input type="text" class="tel-number-field" name="chapter_no" value="{{$mcq->chapter_no}}" maxlength="4" /></label>--}}
-
-{{--            <label><span>Mark</span>--}}
-{{--                <input type="text" class="tel-number-field" name="mark" value="{{$mcq->mark}}" maxlength="4" /></label>--}}
-
-{{--            <label><span>Course id: </span>--}}
-{{--                <input type="number" class="tel-number-field" name="course_id" value="{{$mcq->course_id}}" maxlength="4" /></label>--}}
-
-{{--            <label for="field5"><span>Answer <span class="required">*</span></span>--}}
-{{--                <input type="text" class="input-field" name="correct_answer" value="{{$mcq->correct_answer}}" /></label>--}}
-{{--            <label for="field5"><span>Option 1 <span class="required">*</span></span>--}}
-{{--                <input type="text" class="input-field" name="option1" value="{{$mcq->option1}}" /></label>--}}
-{{--            <label for="field5"><span>Option 2 <span class="required">*</span></span>--}}
-{{--                <input type="text" class="input-field" name="option2" value="{{$mcq->option2}}" /></label>--}}
-{{--            <label for="field5"><span>Option 3 <span class="required">*</span></span>--}}
-{{--                <input type="text" class="input-field" name="option3" value="{{$mcq->option3}}" /></label>--}}
-
-{{--            <button type="submit"> Submit </button>--}}
-{{--        </form>--}}
-{{--    </div>--}}
-
-{{--@endsection--}}
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li><a href="/CC">Home</a></li>
+        <li><a href="/question/index">{{\Illuminate\Support\Facades\Auth::user()->coordinate->name}} Question Bank</a></li>
+        <li><a href="/question/{{$mcq->id}}">{{$mcq->question}}</a></li>
+        <li>Edit</li>
+    </ul>
+@endsection
 
 @section('content')
 

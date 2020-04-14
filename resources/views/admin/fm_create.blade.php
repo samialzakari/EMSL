@@ -1,37 +1,12 @@
-{{--@extends('layouts.app')--}}
-
-{{--@section('content')--}}
-
-{{--    <div class="container">--}}
-{{--        <div class="row justify-content-center">--}}
-{{--            <div class="col-md-8">--}}
-{{--                <div class="card" >--}}
-{{--                    <div class="card-header" style="background:rgba(88,152,164,1)">Add New Faculty Member</div>--}}
-
-{{--                    <div class="card-body">--}}
-{{--                        @if (session('status'))--}}
-{{--                            <div class="alert alert-success" role="alert">--}}
-{{--                                {{ session('status') }}--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
-
-{{--                        Fill the form with faculty member's information:--}}
-
-{{--                        <form method="POST" action="/admin/fm" >--}}
-{{--                            @csrf--}}
-{{--                            <label for="name">Name: <input type="text" name="name"/></label> <br>--}}
-{{--                            <label for="email">E-mail: <input type="text" name="email"/></label> <br>--}}
-{{--                            <label for="password">Password: <input type="password" name="password"/></label> <br>--}}
-{{--                            <button type="submit"> Submit </button>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--@endsection--}}
-
 @extends('layouts.app')
+
+@section('breadcrumb')
+    <ul class="breadcrumb">
+        <li><a href="/admin">Home</a></li>
+        <li><a href="/admin/fm">Faculty Members</a></li>
+        <li>Register</li>
+    </ul>
+@endsection
 
 @section('content')
 
