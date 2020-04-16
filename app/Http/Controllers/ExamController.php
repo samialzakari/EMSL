@@ -94,9 +94,35 @@ class ExamController extends Controller
      * @param  \App\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exam $exam)
+    public function update(Request $request, $id)
     {
-        //
+        $exam = Exam::findOrFail($id);
+        $exam->update(request(['name','date']));
+        $mcqs = $request->get('questions');
+        foreach ($mcqs as $mcq){
+            $exam->mcqs()->detach($mcq);
+            $exam->save();
+        }
+        $exam->calculateMarks();
+        return redirect('/exam/'.$id);
+    }
+
+    public function addMCQS($id){
+        $exam = Exam::findOrFail($id);
+        $course = $exam->course;
+        $mcqs = $course->mcqs->diff($exam->mcqs);
+        return view('exam.add',compact(['exam','mcqs']));
+    }
+
+    public function add(Request $request, $id){
+        $exam = Exam::findOrFail($id);
+        $mcqs = request('questions');
+        foreach ($mcqs as $mcq){
+            $exam->mcqs()->attach($mcq);
+            $exam->save();
+        }
+        $exam->calculateMarks();
+        return redirect('/exam/'.$id);
     }
 
     /**
@@ -105,9 +131,11 @@ class ExamController extends Controller
      * @param  \App\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exam $exam)
+    public function destroy($id)
     {
-        //
+        $exam = Exam::findOrFail($id);
+        $exam->delete();
+        return redirect('/exam');
     }
 
     public function select(Request $request){
@@ -118,7 +146,7 @@ class ExamController extends Controller
             $exam->save();
         }
         $exam->calculateMarks();
-        return redirect('/exam');
+        return redirect('/exam/'.$exam->id);
     }
 
     public function section_index($id){

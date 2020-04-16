@@ -32,7 +32,8 @@
     <ul class="breadcrumb">
         <li><a href="/CC">Home</a></li>
         <li><a href="/exam">{{\Illuminate\Support\Facades\Auth::user()->coordinate->name}} Exams</a></li>
-        <li>Create Exam</li>
+        <li><a href="/exam/{{$exam->id}}">{{$exam->name}}</a></li>
+        <li>Add new questions</li>
     </ul>
 @endsection
 
@@ -42,7 +43,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header" style="background:rgba(88,152,164,1)">Fill out the exam information below:</div>
+                    <div class="card-header" style="background:rgba(88,152,164,1)">Choose questions you want to add to the exam:</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -51,7 +52,7 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="/exam" >
+                        <form method="POST" action="/exam/{{$exam->id}}" >
                             @csrf
                             <label for="{{$exam->id}}"><input type="hidden" name="exam" value="{{$exam->id}}" /></label>
 
@@ -78,7 +79,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="button1">
-                                        Create
+                                        Add the questions
                                     </button>
                                 </div>
                             </div>

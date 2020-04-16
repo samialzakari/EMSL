@@ -57,10 +57,30 @@ class AdminController extends Controller
         return view('admin.section_index', compact(['course','sections','cc']));
     }
 
+    public function section_show($id){
+        $section = Section::findOrFail($id);
+        $course = $section->course;
+        $fms = User::whereIn('role',['1','2'])->get();
+        return view('admin.section_show',compact(['section','course','fms']));
+    }
+
     public function section_create(Request $request){
         $section = new Section($request->all());
         $section->save();
         return redirect('/admin/course/'.request('course_id'));
+    }
+
+    public function section_update($id){
+        $section = Section::findOrFail($id);
+        $section->update(request()->all());
+        return redirect('/admin/course/'.request('course_id'));
+    }
+
+    public function section_destroy($id){
+        $section = Section::findOrFail($id);
+        $course = $section->course->id;
+        $section->delete();
+        return redirect('/admin/course/'.$course);
     }
 
     public function fm_index(){
@@ -132,9 +152,18 @@ class AdminController extends Controller
     public function student_section(Request $request){
         $student = User::findOrFail(request('student_id'));
         $sections = request('sections');
-        foreach ($sections as $section){
-            $student->enroll()->attach($section);
-            $student->save();
+        if(! $sections == null){
+            foreach ($sections as $section){
+                $student->enroll()->attach($section);
+                $student->save();
+            }
+        }
+        $unroll = request('unroll');
+        if(! $unroll == null){
+            foreach ($unroll as $unr){
+                $student->enroll()->detach($unr);
+                $student->save();
+            }
         }
         return redirect('/admin/student/'.$student->id);
     }

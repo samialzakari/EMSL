@@ -25,8 +25,6 @@ Auth::routes();
 Route::get('/CC', 'CourseCoordinatorController@index')->name('CC')->middleware('CourseCoordinator');
 Route::get('/FM', 'SectionController@index')->name('FM')->middleware('FacultyMember');
 
-
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/schedule', function(){
@@ -48,6 +46,13 @@ Route::middleware('CourseCoordinator')->group( function (){
     Route::get('/exam/create', 'ExamController@create');
     Route::post('/exam/create', 'ExamController@store');
     Route::get('/exam/{id}', 'ExamController@show');
+    Route::get('/exam/{id}/edit', function ($id){
+        return view('exam.edit',['exam' => \App\Exam::findOrFail($id)]);
+    });
+    Route::put('/exam/{id}','ExamController@update');
+    Route::delete('/exam/{id}', 'ExamController@destroy');
+    Route::get('/exam/{id}/add', 'ExamController@addMCQS');
+    Route::post('/exam/{id}','ExamController@add');
 });
 
 
@@ -87,9 +92,10 @@ Route::middleware('admin')->group( function (){
     Route::post('/admin/student','AdminController@student_create');
     Route::get('/admin/student/{id}', 'AdminController@student_show');
     Route::get('/admin/student/{id}/section', function ($id){
+        $student = User::findOrFail($id);
         return view('admin.student_section',[
-            'student' => User::findOrFail($id),
-            'sections' => \App\Section::all()->sortBy('course_id')
+            'student' => $student,
+            'sections' => \App\Section::all()->sortBy('course_id')->diff($student->enroll)
         ]);
     });
     Route::post('/admin/student/{id}', 'AdminController@student_section');
@@ -98,6 +104,10 @@ Route::middleware('admin')->group( function (){
     });
     Route::put('/admin/student/{id}','AdminController@student_update');
     Route::delete('/admin/student/{id}', 'AdminController@student_destroy');
+
+    Route::get('/admin/section/{id}','AdminController@section_show');
+    Route::post('/admin/section/{id}','AdminController@section_update');
+    Route::delete('/admin/section/{id}','AdminController@section_destroy');
 });
 
 

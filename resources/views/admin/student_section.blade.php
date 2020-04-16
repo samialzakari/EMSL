@@ -43,7 +43,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header" style="background:rgba(88,152,164,1)">Register Sections</div>
+                    <div class="card-header" style="background:rgba(88,152,164,1)">{{$student->name}}'s Sections</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -55,7 +55,16 @@
                         <form method="POST" action="/admin/student/{{$student->id}}" >
                             @csrf
                             <input type="hidden" name="student_id" value="{{$student->id}}"/>
-                            <label for="section_id">Choose {{$student->name}}'s Sections: <br>
+
+                            <label for="section_id">Choose Sections to Remove: <br>
+                                @foreach( $student->enroll as $section)
+                                    <input type="checkbox" name="unroll[]" value="{{$section->id}}" />
+                                    <label for="{{$section->id}}" style="display: inline">Course: {{$section->course->name}}, Section: {{$section->id}}</label>
+                                    <br>
+                                @endforeach
+                            </label> <br>
+
+                            <label for="section_id">Choose Sections to Add: <br>
                                 @foreach( $sections as $section)
                                     <input type="checkbox" name="sections[]" value="{{$section->id}}" />
                                     <label for="{{$section->id}}" style="display: inline">Course: {{$section->course->name}}, Section: {{$section->id}}</label>

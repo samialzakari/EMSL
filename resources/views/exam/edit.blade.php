@@ -110,8 +110,8 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li><a href="/CC">Home</a></li>
-        <li><a href="/question/index">{{\Illuminate\Support\Facades\Auth::user()->coordinate->name}} Question Bank</a></li>
-        <li><a href="/question/{{$mcq->id}}">{{$mcq->question}}</a></li>
+        <li><a href="/exam">{{\Illuminate\Support\Facades\Auth::user()->coordinate->name}} Exams</a></li>
+        <li><a href="/exam/{{$exam->id}}">{{$exam->name}}</a></li>
         <li>Edit</li>
     </ul>
 @endsection
@@ -122,7 +122,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header" style="background:rgba(88,152,164,1)">Fill out the question information below:</div>
+                    <div class="card-header" style="background:rgba(88,152,164,1)">Update exam information:</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -131,75 +131,49 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="" >
+                        <form method="POST" action="/exam/{{$exam->id}}">
                             @method('PUT')
                             @csrf
-                            <input type="hidden" class="tel-number-field" name="course_id" value="{{Auth::user()->coordinate->id}}" />
-
                             <div class="form-group row">
-                                <label for="question" class="col-md-4 col-form-label text-md-right">Question:</label>
+                                <label for="course" class="col-md-4 col-form-label text-md-right">Course:</label>
 
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="question" value="{{$mcq->question}}" autofocus required>
+                                <div class="col-md-5">
+                                    <label for="course" class="col-md-4 col-form-label text-md-left">{{ Auth::user()->coordinate->name }}</label>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="chapter_no" class="col-md-4 col-form-label text-md-right">Chapter Number:</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Exam name:</label>
 
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" name="chapter_no" min="0" max="{{\Illuminate\Support\Facades\Auth::user()->coordinate->num_chapters}}" value="{{$mcq->chapter_no}}" autofocus required>
+                                    <input type="text" class="form-control" name="name" value="{{$exam->name}}" autofocus required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="mark" class="col-md-4 col-form-label text-md-right">Mark:</label>
+                                <label for="date" class="col-md-4 col-form-label text-md-right">Exam date:</label>
 
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" name="mark" min="0" max="99" value="{{$mcq->mark}}" autofocus required>
-                                </div>
-                            </div>
-
-
-                            <label>Note: If the answers is True/False just fill correct answer and the first option</label>
-
-
-                            <div class="form-group row">
-                                <label for="correct_answer" class="col-md-4 col-form-label text-md-right">Correct answer:</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="correct_answer" value="{{$mcq->correct_answer}}" autofocus required>
+                                    <input type="date" class="form-control" name="date" value="{{$exam->date}}" autofocus required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="option1" class="col-md-4 col-form-label text-md-right">First option:</label>
+                                <label for="question" class="col-md-4 col-form-label text-md-right">Choose questions that you want to remove from the exam:</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="option1" value="{{$mcq->option1}}" autofocus required>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="option2" class="col-md-4 col-form-label text-md-right">Second option:</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="option2" value="{{$mcq->option2}}" autofocus>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="option3" class="col-md-4 col-form-label text-md-right">Third option:</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="option3" value="{{$mcq->option3}}" autofocus>
+                                    @foreach($exam->mcqs as $mcq)
+                                        <input type="checkbox" name="questions[]" value="{{$mcq->id}}" autofocus>
+                                        <label for="{{$mcq->id}}" >{{$mcq->question}}</label>
+                                        <br>
+                                    @endforeach
                                 </div>
                             </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="button1">
-                                        Submit
+                                        Update
                                     </button>
                                 </div>
                             </div>

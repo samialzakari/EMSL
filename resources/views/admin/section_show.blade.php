@@ -43,8 +43,9 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li><a href="/admin">Home</a></li>
-        <li><a href="/admin/student">Students</a></li>
-        <li>{{$student->name}}</li>
+        <li><a href="/admin/course">Courses</a></li>
+        <li><a href="/admin/course/{{$course->id}}">{{$course->name}}</a></li>
+        <li>Section {{$section->id}}</li>
     </ul>
 @endsection
 
@@ -54,7 +55,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header" style="background:rgba(88,152,164,1)">{{$student->name}}</div>
+                    <div class="card-header" style="background:rgba(88,152,164,1)">Section {{$section->id}}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -63,26 +64,25 @@
                             </div>
                         @endif
 
-                        <p>Student e-mail: {{$student->email}}</p>
-                        <p>Student Sections:</p>
 
-                        @foreach($sections as $section)
-                            <a class="dropdown-item" href="/admin/section/{{$section->id}}">
-                                Course: {{$section->course->name}} , Section Number: {{$section->id}} , Student Mark: {{$section->mark ?? 0}}
-                            </a>
-                        @endforeach
+                        <form method="POST" action="/admin/section/{{$section->id}}" >
+                            @csrf
+                            <input type="hidden" name="course_id" value="{{$course->id}}"/> <br>
+                            <label for="fm_id">Choose Instructor:
+                                <select name="fm_id">
+                                    @foreach($fms as $fm)
+                                        <option value="{{$fm->id}}">{{$fm->name}}</option>
+                                    @endforeach
+                                </select>
+                            </label> <br>
+                            <button type="submit" class="button1"> Submit </button>
+                        </form>
 
-
-                        <div style="text-align: right; margin-top: 8px">
-                            <button class="button1" onclick="window.location.href = '/admin/student/{{$student->id}}/section'" style="float: left">Sections Registration</button>
-                            <button class="button1" onclick="window.location.href = '/admin/student/{{$student->id}}/edit'">Edit</button>
-                            <form action="" method="post" style="display: inline">
-                                @method('DELETE')
-                                @csrf
-                                <input type="submit" value="Delete" class="button2"/>
-                            </form>
-                        </div>
-                    <!--You are logged in! {{Auth::user()->name}}-->
+                        <form action="/admin/section/{{$section->id}}" method="post" style="display: inline">
+                            @method('DELETE')
+                            @csrf
+                            <input type="submit" value="Delete Section" class="button2"/>
+                        </form>
                     </div>
                 </div>
             </div>
