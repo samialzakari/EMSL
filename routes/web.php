@@ -66,10 +66,21 @@ Route::middleware('admin')->group( function (){
         ]);
     });
     Route::post('/admin/course/{id}', 'AdminController@section_create');
+    Route::get('/admin/course/{id}/edit', function ($id){
+        return view('admin.course_edit', ['fms' => User::where('role','2')->get(),'course' => \App\Course::find($id)]);
+    });
+    Route::put('/admin/course/{id}','AdminController@course_update');
+    Route::delete('/admin/course/{id}','AdminController@course_destroy');
 
     Route::get('/admin/fm','AdminController@fm_index');
     Route::view('/admin/fm/create','admin.fm_create');
     Route::post('/admin/fm','AdminController@fm_create');
+    Route::get('/admin/fm/{id}','AdminController@fm_show');
+    Route::get('/admin/fm/{id}/edit', function ($id){
+       return view('admin.fm_edit',['fm' => User::findOrFail($id)]);
+    });
+    Route::put('/admin/fm/{id}','AdminController@fm_update');
+    Route::delete('/admin/fm/{id}','AdminController@fm_destroy');
 
     Route::get('/admin/student','AdminController@student_index');
     Route::view('/admin/student/create','admin.student_create');
@@ -78,10 +89,15 @@ Route::middleware('admin')->group( function (){
     Route::get('/admin/student/{id}/section', function ($id){
         return view('admin.student_section',[
             'student' => User::findOrFail($id),
-            'sections' => \App\Section::all()
+            'sections' => \App\Section::all()->sortBy('course_id')
         ]);
     });
     Route::post('/admin/student/{id}', 'AdminController@student_section');
+    Route::get('/admin/student/{id}/edit', function ($id){
+        return view('admin.student_edit',['student' => User::findOrFail($id)]);
+    });
+    Route::put('/admin/student/{id}','AdminController@student_update');
+    Route::delete('/admin/student/{id}', 'AdminController@student_destroy');
 });
 
 

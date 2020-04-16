@@ -20,8 +20,8 @@ class CreateCoursesTable extends Migration
             $table->integer('num_chapters');
             $table->timestamps();
 
-            $table->unsignedBigInteger('cc_id');
-            $table->foreign('cc_id')->references('id')->on('users');
+            $table->unsignedBigInteger('cc_id')->nullable();
+            $table->foreign('cc_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

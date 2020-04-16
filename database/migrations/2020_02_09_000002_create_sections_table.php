@@ -17,11 +17,11 @@ class CreateSectionsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 
-            $table->unsignedBigInteger('fm_id');
-            $table->foreign('fm_id')->references('id')->on('users');
+            $table->unsignedBigInteger('fm_id')->nullable();
+            $table->foreign('fm_id')->references('id')->on('users')->onDelete('set null');
 
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
 
         Schema::create('section_student',function (Blueprint $table){

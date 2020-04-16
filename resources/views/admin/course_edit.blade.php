@@ -31,9 +31,9 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li><a href="/admin">Home</a></li>
-        <li><a href="/admin/student">Students</a></li>
-        <li><a href="/admin/student/{{$student->id}}">{{$student->name}}</a></li>
-        <li>Register Sections</li>
+        <li><a href="/admin/course">Courses</a></li>
+        <li><a href="/admin/course/{{$course->id}}">{{$course->name}}</a></li>
+        <li>Edit</li>
     </ul>
 @endsection
 
@@ -43,7 +43,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header" style="background:rgba(88,152,164,1)">Register Sections</div>
+                    <div class="card-header" style="background:rgba(88,152,164,1)">Edit Course</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -52,15 +52,22 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="/admin/student/{{$student->id}}" >
+                        Fill the form with course information:
+
+                        <form method="POST" action="/admin/course/{{$course->id}}">
+                            @method('PUT')
                             @csrf
-                            <input type="hidden" name="student_id" value="{{$student->id}}"/>
-                            <label for="section_id">Choose {{$student->name}}'s Sections: <br>
-                                @foreach( $sections as $section)
-                                    <input type="checkbox" name="sections[]" value="{{$section->id}}" />
-                                    <label for="{{$section->id}}" style="display: inline">Course: {{$section->course->name}}, Section: {{$section->id}}</label>
-                                    <br>
-                                @endforeach
+                            <label for="name">Course name: <input type="text" name="name" value="{{$course->name}}" required/></label> <br>
+                            <label for="department">Department: <input type="text" name="department" value="{{$course->department}}" required/></label> <br>
+                            <label for="num_chapters">Number of chapters: <input type="number" name="num_chapters" value="{{$course->num_chapters}}" required/></label>
+                            <br>
+                            <label for="cc_id">Choose course coordinator:
+                                <select name="cc_id" required>
+                                    <option value="{{$course->coordinator->id}}">{{$course->coordinator->name}}</option>
+                                    @foreach($fms as $fm)
+                                        <option value="{{$fm->id}}">{{$fm->name}}</option>
+                                    @endforeach
+                                </select>
                             </label> <br>
                             <button type="submit" class="button1"> Submit </button>
                         </form>

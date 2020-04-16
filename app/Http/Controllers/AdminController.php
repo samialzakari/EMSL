@@ -29,6 +29,27 @@ class AdminController extends Controller
         return redirect('/admin/course');
     }
 
+    public function course_update(Request $request, $id){
+        $course = Course::findOrFail($id);
+        if($course->coordinator->id !== $request->get('cc_id')){
+            $course->coordinator->role = 2;
+            $course->coordinator->save();
+            $cc = User::findOrFail(request('cc_id'));
+            $cc->role = 1;
+            $cc->save();
+        }
+        $course->update($request->all());
+        return redirect('/admin/course/'.$id);
+    }
+
+    public function course_destroy($id){
+        $course = Course::findOrFail($id);
+        $course->coordinator->role = 2;
+        $course->coordinator->save();
+        $course->delete();
+        return redirect('/admin/course');
+    }
+
     public function section_index($id){
         $course = Course::findOrFail($id);
         $cc = User::findOrFail($course->cc_id);
@@ -47,6 +68,12 @@ class AdminController extends Controller
         return view('admin.fm_index', ['fms' => $fms]);
     }
 
+    public function fm_show($id){
+        $fm = User::findOrFail($id);
+        $sections = $fm->teach;
+        return view('admin.fm_show',compact(['fm','sections']));
+    }
+
     public function fm_create(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -58,6 +85,20 @@ class AdminController extends Controller
         $fm->role = 2;
         $fm->save();
 
+        return redirect('/admin/fm');
+    }
+
+    public function fm_update(Request $request, $id){
+        $fm = User::findOrFail($id);
+        $fm->update($request->all());
+        $fm->password = Hash::make(request('password'));
+        $fm->save();
+        return redirect('/admin/fm/'.$id);
+    }
+
+    public function fm_destroy($id){
+        $fm = User::findOrFail($id);
+        $fm->delete();
         return redirect('/admin/fm');
     }
 
@@ -96,5 +137,19 @@ class AdminController extends Controller
             $student->save();
         }
         return redirect('/admin/student/'.$student->id);
+    }
+
+    public function student_update(Request $request, $id){
+        $student = User::findOrFail($id);
+        $student->update($request->all());
+        $student->password = Hash::make(request('password'));
+        $student->save();
+        return redirect('admin/student/'.$id);
+    }
+
+    public function student_destroy($id){
+        $student = User::findOrFail($id);
+        $student->delete();
+        return redirect('admin/student');
     }
 }

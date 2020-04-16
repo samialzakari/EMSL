@@ -15,7 +15,7 @@ class Course extends Model
     }
 
     public function coordinator(){
-        return $this->hasOne(User::class,'cc_id');
+        return $this->belongsTo(User::class,'cc_id');
     }
 
     public function mcqs(){

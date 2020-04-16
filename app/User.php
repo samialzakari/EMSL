@@ -50,7 +50,7 @@ class User extends Authenticatable
     }
 
     public function coordinate(){
-        return $this->hasOne(Course::class,'cc_id');
+        return $this->hasOne(Course::class);
     }
 
     public function exams(){

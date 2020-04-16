@@ -25,7 +25,7 @@ class CreateMCQSTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 <style>
     .button {
         background-color: #4CAF50; /* Green */
@@ -42,8 +43,8 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li><a href="/admin">Home</a></li>
-        <li><a href="/admin/course">Courses</a></li>
-        <li>{{$course->name}}</li>
+        <li><a href="/admin/fm">Faculty Members</a></li>
+        <li>{{$fm->name}}</li>
     </ul>
 @endsection
 
@@ -53,7 +54,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header" style="background:rgba(88,152,164,1)">{{$course->name}}</div>
+                    <div class="card-header" style="background:rgba(88,152,164,1)">{{$fm->name}}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -62,28 +63,25 @@
                             </div>
                         @endif
 
-                        <p>Course Department: {{$course->department}}</p>
-                        <p>Number of Chapters: {{$course->num_chapters}}</p>
-                        <p>Course Coordinator: {{$cc->name}}</p>
-                        <p>Course Sections:</p>
+                        <p>e-mail: {{$fm->email}}</p>
+                        <p>{{$fm->name}} Sections:</p>
 
                         @foreach($sections as $section)
                             <a class="dropdown-item" href="/admin/section/{{$section->id}}">
-                                Section Number: {{$section->id}} , Instructor: {{$section->facultyMember->name}}
+                                Course: {{$section->course->name}} , Section Number: {{$section->id}}
                             </a>
                         @endforeach
 
+
                         <div style="text-align: right; margin-top: 8px">
-                            <button style="float: left" class="button1" onclick="window.location.href = '/admin/course/{{$course->id}}/create'">Add new section</button>
-                            <button class="button1" onclick="window.location.href = '/admin/course/{{$course->id}}/edit'">Edit</button>
+                            <button class="button1" onclick="window.location.href = '/admin/fm/{{$fm->id}}/edit'">Edit</button>
                             <form action="" method="post" style="display: inline">
                                 @method('DELETE')
                                 @csrf
                                 <input type="submit" value="Delete" class="button2"/>
                             </form>
                         </div>
-
-                        <!--You are logged in! {{Auth::user()->name}}-->
+                    <!--You are logged in! {{Auth::user()->name}}-->
                     </div>
                 </div>
             </div>
