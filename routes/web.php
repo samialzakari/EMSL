@@ -111,7 +111,6 @@ Route::middleware('admin')->group( function (){
 });
 
 
-//Route::get('/section', 'SectionController@index');
 Route::get('/section/{id}', 'SectionController@show');
 Route::get('/section/{id}/exam', 'ExamController@section_index');
 Route::get('/section/{id}/exam/{exam_id}', 'ExamController@section_show');

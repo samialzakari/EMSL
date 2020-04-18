@@ -44,7 +44,7 @@
                         @endif
 
                         <div class="visible-print text-center">
-                            {!! QrCode::size(480)->generate('exam/'.$exam); !!}
+                            {!! QrCode::size(480)->generate('http://gp-ems.herokuapp.com/api/exam/'.$exam); !!}
                         </div>
 
                         <div style="text-align: center">

@@ -32,7 +32,8 @@
     <ul class="breadcrumb">
         <li><a href="/admin">Home</a></li>
         <li><a href="/admin/student">Students</a></li>
-        <li>Register Student</li>
+        <li><a href="/admin/student/{{$student->id}}">{{$student->name}}</a></li>
+        <li>Edit</li>
     </ul>
 @endsection
 
@@ -42,7 +43,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header" style="background:rgba(88,152,164,1)">Add New Student</div>
+                    <div class="card-header" style="background:rgba(88,152,164,1)">Update Student's Information</div>
 
                     <div class="card-body">
                         <form method="POST" action="/admin/student/{{$student->id}}">
