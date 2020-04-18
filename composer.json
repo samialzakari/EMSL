@@ -13,6 +13,7 @@
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",
+        "rap2hpoutre/fast-excel": "^1.7",
         "simplesoftwareio/simple-qrcode": "~2"
     },
     "require-dev": {

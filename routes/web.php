@@ -118,3 +118,4 @@ Route::get('/section/{id}/exam/{exam_id}', 'ExamController@section_show');
 Route::get('/section/{id}/exam/{exam_id}/qrcode', 'ExamController@open');
 Route::get('/section/{id}/student', 'StudentController@index');
 Route::get('/section/{id}/student/{student_id}','StudentController@show');
+Route::get('/section/{id}/export','StudentController@export');

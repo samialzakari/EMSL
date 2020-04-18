@@ -12,6 +12,33 @@
     }
 
     tr:hover {background-color:#f5f5f5;}
+
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid rgb(88, 151, 163);
+        border-radius: 0.25rem;
+        margin-bottom: 5px;
+    }
+
+    .button1:hover {
+        background-color: rgb(88, 151, 163);
+        color: white;
+    }
 </style>
 
 @section('breadcrumb')
@@ -36,6 +63,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        <button type="submit" class="button1" onclick="window.location.href = '/section/{{$section->id}}/export'"> Export to spreadsheet file </button>
                         <table class="table">
                             <tr>
                                 <th >Name</th>

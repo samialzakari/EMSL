@@ -67,8 +67,8 @@
                         <p>Student Sections:</p>
 
                         @foreach($sections as $section)
-                            <a class="dropdown-item" href="/admin/section/{{$section->id}}">
-                                Course: {{$section->course->name}} , Section Number: {{$section->id}} , Student Mark: {{$section->mark ?? 0}}
+                            <a class="dropdown-item">
+                                Course: {{$section->course->name}} , Section Number: {{$section->id}} , Student Mark: {{\Illuminate\Support\Facades\DB::table('section_student')->where('section_id',$section->id)->where('student_id',$student->id)->value('mark') ?? 0}}
                             </a>
                         @endforeach
 
