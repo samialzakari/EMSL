@@ -159,6 +159,14 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="duration" class="col-md-4 col-form-label text-md-right">Exam duration (minutes):</label>
+
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" name="duration" value="{{$exam->duration}}" autofocus required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="question" class="col-md-4 col-form-label text-md-right">Choose questions that you want to remove from the exam:</label>
 
                                 <div class="col-md-6">

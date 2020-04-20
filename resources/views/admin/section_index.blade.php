@@ -69,7 +69,7 @@
 
                         @foreach($sections as $section)
                             <a class="dropdown-item" href="/admin/section/{{$section->id}}">
-                                Section Number: {{$section->id}} , Instructor: {{$section->facultyMember->name}}
+                                Section Number: {{$section->id}} , Instructor: @if($section->facultyMember !== null){{$section->facultyMember->name }} @else Choose instructor please @endif
                             </a>
                         @endforeach
 

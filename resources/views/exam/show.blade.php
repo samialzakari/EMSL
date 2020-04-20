@@ -63,9 +63,11 @@
                             </div>
                         @endif
 
-                        <h5> Course:  {{$exam->course->name}}  </h5>
+                        <h5>Course:  {{$exam->course->name}}  </h5>
                         <h5>Exam: {{$exam->name}} </h5>
-                        <h5> Mark:  {{$exam->mark}}  </h5>
+                        <h5>Mark:  {{$exam->mark}}  </h5>
+                        <h5>Date:  {{$exam->date}}  </h5>
+                        <h5>Duration:  {{$exam->duration}} minutes </h5>
                         <br>
 
                         @foreach($exam->mcqs as $mcq)

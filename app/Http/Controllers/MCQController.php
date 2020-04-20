@@ -42,7 +42,7 @@ class MCQController extends Controller
         $mcq = new MCQ(request(['question','chapter_no','mark','correct_answer','option1','option2','option3','course_id']));
         $mcq->save();
 
-        return redirect('/question/index');
+        return redirect('/question/index',201);
 
     }
 

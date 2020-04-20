@@ -14,7 +14,14 @@ class ExamApiController extends Controller
 {
     public function exam($id){
         $exam = Exam::findOrFail($id);
-        return MCQResource::collection($exam->mcqs);
+//        return MCQResource::collection($exam->mcqs);
+        return response()->json([
+            'exam_id' => $exam->id,
+            'exam_name' => $exam->name,
+            'exam_mark' => $exam->mark,
+            'exam_duration' => $exam->duration,
+            'exam_mcqs' => MCQResource::collection($exam->mcqs),
+        ]);
     }
 
     public function submit(Request $request){

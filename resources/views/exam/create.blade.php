@@ -157,6 +157,14 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="duration" class="col-md-4 col-form-label text-md-right">Exam duration (minutes):</label>
+
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" name="duration" min="0" autofocus required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="num_chapters" class="col-md-4 col-form-label text-md-right">Choose chapters:</label>
 
                                 <div class="col-md-6">

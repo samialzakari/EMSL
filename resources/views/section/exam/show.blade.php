@@ -28,6 +28,7 @@
                         <a class="dropdown-item">Exam: {{$exam->name}}</a>
                         <a class="dropdown-item">Exam Marks: {{$exam->mark}}</a>
                         <a class="dropdown-item">Exam Date: {{$exam->date}}</a>
+                        <a class="dropdown-item">Exam Duration: {{$exam->duration}} minutes</a>
 
                         @if($isTaken)
                             <a class="dropdown-item">Average Students' Marks: {{$avg}}</a>

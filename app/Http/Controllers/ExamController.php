@@ -46,7 +46,7 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        $exam = new Exam(request(['name','date']));
+        $exam = new Exam(request(['name','date','duration']));
         $exam->mark = 0;
         $exam->course_id = Auth::user()->coordinate->id;
         $exam->save();
@@ -97,13 +97,16 @@ class ExamController extends Controller
     public function update(Request $request, $id)
     {
         $exam = Exam::findOrFail($id);
-        $exam->update(request(['name','date']));
+        $exam->update(request(['name','date','duration']));
         $mcqs = $request->get('questions');
-        foreach ($mcqs as $mcq){
-            $exam->mcqs()->detach($mcq);
-            $exam->save();
+        if($mcqs !== null){
+            foreach ($mcqs as $mcq){
+                $exam->mcqs()->detach($mcq);
+                $exam->save();
+            }
+            $exam->calculateMarks();
         }
-        $exam->calculateMarks();
+
         return redirect('/exam/'.$id);
     }
 

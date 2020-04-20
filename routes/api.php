@@ -29,5 +29,5 @@ Route::get('/Student', 'StudentController@index')->name('Student')->middleware('
 Route::middleware(['auth:api', 'Student'])->group( function (){
     Route::post('logout','Api\UserApiController@logout');
     Route::get('exam/{id}', 'Api\ExamApiController@exam');
-    Route::post('submit','Api\ExamApiController@submit');
+    Route::post('exam/{id}','Api\ExamApiController@submit');
 });
