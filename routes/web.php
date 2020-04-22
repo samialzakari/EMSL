@@ -25,11 +25,6 @@ Auth::routes();
 Route::get('/CC', 'CourseCoordinatorController@index')->name('CC')->middleware('CourseCoordinator');
 Route::get('/FM', 'SectionController@index')->name('FM')->middleware('FacultyMember');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/schedule', function(){
-         return view('/schedule'); });
-
 
 Route::middleware('CourseCoordinator')->group( function (){
     Route::get('/question/index', 'MCQController@index');

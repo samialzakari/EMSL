@@ -22,7 +22,8 @@ class MCQResource extends JsonResource
             'option1' => $this->option1,
             'option2' => $this->option2,
             'option3' => $this->option3,
-            'option4' => $this->option4
+            'option4' => $this->option4,
+            'correct_answer' => $this->correct_answer
         ];
     }
 }
