@@ -68,12 +68,13 @@
                         <h5>Chapter Number: {{$mcq->chapter_no}}  </h5>
                         <br>
                         <h5>Correct answer: <label style="color:#32CD32">{{$mcq->correct_answer}} </label></h5>
-                        <h5>Option 1: <label style="color:red">{{$mcq->option1}}  </label></h5>
-                        @if($mcq->option2 !== null)
-                        <h5>Option 2: <label style="color:red">{{$mcq->option2}}  </label></h5>
-                        @endif
+                        <h5>Option 1: <label>{{$mcq->option1}}  </label></h5>
+                        <h5>Option 2: <label>{{$mcq->option2}}  </label></h5>
                         @if($mcq->option3 !== null)
-                        <h5>Option 3: <label style="color:red">{{$mcq->option3}}  </label></h5>
+                        <h5>Option 3: <label>{{$mcq->option3}}  </label></h5>
+                        @endif
+                        @if($mcq->option4 !== null)
+                        <h5>Option 4: <label>{{$mcq->option4}}  </label></h5>
                         @endif
                         <br>
 

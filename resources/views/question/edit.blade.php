@@ -163,15 +163,6 @@
 
                             <label>Note: If the answers is True/False just fill correct answer and the first option</label>
 
-
-                            <div class="form-group row">
-                                <label for="correct_answer" class="col-md-4 col-form-label text-md-right">Correct answer:</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="correct_answer" value="{{$mcq->correct_answer}}" autofocus required>
-                                </div>
-                            </div>
-
                             <div class="form-group row">
                                 <label for="option1" class="col-md-4 col-form-label text-md-right">First option:</label>
 
@@ -184,7 +175,7 @@
                                 <label for="option2" class="col-md-4 col-form-label text-md-right">Second option:</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="option2" value="{{$mcq->option2}}" autofocus>
+                                    <input type="text" class="form-control" name="option2" value="{{$mcq->option2}}" autofocus required>
                                 </div>
                             </div>
 
@@ -193,6 +184,27 @@
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="option3" value="{{$mcq->option3}}" autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="option4" class="col-md-4 col-form-label text-md-right">Fourth Option:</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="option4" value="{{ $mcq->option4 }}" autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="correct_answer" class="col-md-4 col-form-label text-md-right">Choose the correct answer:</label>
+
+                                <div class="col-md-6">
+                                    <select name="correct_answer" class="form-control">
+                                        <option value="option1">First Option</option>
+                                        <option value="option2">Second Option</option>
+                                        <option value="option3">Third Option</option>
+                                        <option value="option4">Fourth Option</option>
+                                    </select>
                                 </div>
                             </div>
 

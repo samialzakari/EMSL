@@ -39,7 +39,8 @@ class MCQController extends Controller
      */
     public function store(Request $request)
     {
-        $mcq = new MCQ(request(['question','chapter_no','mark','correct_answer','option1','option2','option3','course_id']));
+        $mcq = new MCQ(request(['question','chapter_no','mark','option1','option2','option3','option4','course_id']));
+        $mcq->correct_answer = request( request('correct_answer') );
         $mcq->save();
 
         return redirect('/question/index',201);
@@ -85,12 +86,14 @@ class MCQController extends Controller
             'question'=> 'required',
             'chapter_no' => 'required',
             'mark' => 'required',
-            'correct_answer' => 'required',
             'option1' => 'required',
             'option2' => 'required',
-            'option3' => 'required',
+            'option3' => '',
+            'option4' => '',
             'course_id' => 'required'
         ]));
+        $mcq->correct_answer = request( request('correct_answer') );
+        $mcq->save();
 
         return redirect('/question/'.$mcq->id);
     }

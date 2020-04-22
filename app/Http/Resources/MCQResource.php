@@ -18,12 +18,11 @@ class MCQResource extends JsonResource
         return [
             'mcq_id' => $this->id,
             'question' => $this->question,
-            'chapter_no' => $this->chapter_no,
             'mcq_mark' => $this->mark,
-            'correct_answer' => $this->correct_answer,
             'option1' => $this->option1,
             'option2' => $this->option2,
             'option3' => $this->option3,
+            'option4' => $this->option4
         ];
     }
 }
