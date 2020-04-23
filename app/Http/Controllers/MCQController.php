@@ -43,7 +43,7 @@ class MCQController extends Controller
         $mcq->correct_answer = request( request('correct_answer') );
         $mcq->save();
 
-        return redirect('/question/index');
+        return redirect('/question/index',201);
 
     }
 
