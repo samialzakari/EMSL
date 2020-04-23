@@ -37,6 +37,6 @@ class ExamApiController extends Controller
     }
 
     public function submit(Request $request){
-        //
+
     }
 }
