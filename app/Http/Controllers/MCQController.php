@@ -16,7 +16,6 @@ class MCQController extends Controller
      */
     public function index()
     {
-//        $mcqs= MCQ::all();
         $mcqs = MCQ::where('course_id', Auth::user()->coordinate->id)->get();
         return view('/question.index')->with('mcqs', $mcqs);
     }
@@ -55,8 +54,6 @@ class MCQController extends Controller
      */
     public function show($id)
     {
-
-        // return view('question.show', ['mcq' => $mcq]);
         return view('question.show', ['mcq' => MCQ::findOrFail($id)]);
     }
 

@@ -136,8 +136,6 @@ class AdminController extends Controller
         $student = new User(request(['name','email']));
         $student->password = Hash::make(request('password'));
         $student->role = 3;
-//        $success['token'] =  $student->createToken('MyApp')-> accessToken;
-//        $success['name'] =  $student->name;
         $student->save();
 
         return redirect('/admin/student');

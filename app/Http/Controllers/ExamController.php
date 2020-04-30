@@ -20,7 +20,6 @@ class ExamController extends Controller
      */
     public function index()
     {
-//        $exams= Exam::all();
         $exams = Exam::where('course_id', Auth::user()->coordinate->id)->get();
         return view('/exam.index')->with('exams', $exams);
     }
@@ -74,17 +73,6 @@ class ExamController extends Controller
         return view('exam.show',[
             'exam' => $exam
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Exam  $exam
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Exam $exam)
-    {
-        //
     }
 
     /**

@@ -29,6 +29,12 @@ class UserApiController extends Controller
         }
     }
 
+    /**
+     * logout api
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
    public function logout(Request $request){
        $accessToken = Auth::user()->token();
 
